@@ -11,9 +11,12 @@
 #include<vector>
 #include<set>
 #include<fstream>
+#include"renderer.h"
 #include "Parser.h"
 int sz = 420; // количество строк в файле
-vector<Object> container; //здесь храним орбиты
+deque<Object> container; //здесь храним орбиты
+Renderer renderer = Renderer(&container);
+
 void menu(int pos);
 void idle();
 void display();
@@ -65,7 +68,7 @@ void menu(int pos)
 }
 void display()
 {
-    (container[0]).render(0.5);
+    renderer();
     glutSwapBuffers();
 }
 void idle()
