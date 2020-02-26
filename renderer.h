@@ -18,6 +18,13 @@ public:
             (*it).render(0.1);
         }
     }
+    void dynamic_render(double dt)
+    {
+        for(auto it = container->begin(); it != container->end(); ++it)
+        {
+            (*it).dynamic_render(0.1);
+        }
+    }
     void operator()(void)
     {
         this->render(container);

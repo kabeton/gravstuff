@@ -1,5 +1,4 @@
 #include<iostream>
-#include "approximator.h"
 #include "Vector.h"
 #include"object.h"
 #include <iostream>
@@ -68,10 +67,15 @@ void menu(int pos)
 }
 void display()
 {
-    renderer();
+    //renderer();
+    glBegin(GL_LINE);
+    glVertex2f(0, 0);
+    glVertex2f(1, 1);
+    glEnd();
     glutSwapBuffers();
 }
 void idle()
 {
-
+    renderer.dynamic_render(0.0001);
+    glutSwapBuffers();
 }

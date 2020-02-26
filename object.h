@@ -41,6 +41,7 @@ public:
         }
         return Vector((*it)[1], (*it)[2], (*it)[3]);
     }
+
     void render(double step)
     {
         glBegin(GL_POINTS);
@@ -56,6 +57,17 @@ public:
             glVertex2f(point.x, point.y);
         }
         glEnd();
+    }
+    void dynamic_render(double dt)
+    {
+        glBegin(GL_POINTS);
+        for (double i = 0; i <= time; i +=step)
+        {
+            Vector point = get_value(i);
+            glVertex2f(point.x, point.y);
+        }
+        glEnd();
+        time += dt;
     }
     void parser_init(char _sep)
     {
@@ -84,6 +96,10 @@ public:
 private:
     std::deque<double*> data;
     Parser parser = Parser();
+    deque<double*>::iterator position = data.begin();
+    double time = 1;
+    double n = 1;
+    double step = 0.0001;
 };
 
 
