@@ -31,6 +31,11 @@ public:
         velocity = _velocity;
         cmp = Compare();
     }
+    void set_initial_time(double _time)
+    {
+        time = _time;
+        std::cout<<"**"<<time<<std::endl;
+    }
     Vector get_value(double time)
     {
         cmp.t = time;
@@ -99,7 +104,7 @@ private:
     deque<double*>::iterator position = data.begin();
     double time = 1;
     double n = 1;
-    double step = 0.0001;
+    double step = 0.00001;
 };
 
 

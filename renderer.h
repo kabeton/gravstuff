@@ -29,8 +29,21 @@ public:
     {
         this->render(container);
     }
+    void set_initial_time(double _time)
+    {
+        for(auto it = container->begin(); it != container->end(); ++it) (*it).set_initial_time(_time);
+    }
+    bool get_mode()
+    {
+        return mode;
+    }
+    void set_mode(bool _mode)
+    {
+        mode = _mode;
+    }
 private:
     deque<Object> *container = NULL;
+    bool mode = true;
 
 };
 
