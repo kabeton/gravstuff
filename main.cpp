@@ -12,6 +12,7 @@
 #include<fstream>
 #include"renderer.h"
 #include "Parser.h"
+#include"grid.h"
 int sz = 420; // количество строк в файле
 deque<Object> container; //здесь храним орбиты
 Renderer renderer = Renderer(&container);
@@ -37,8 +38,18 @@ int create_window(int argc, char **argv, char *param, int width, int height)
     glutAttachMenu(GLUT_RIGHT_BUTTON);
     return res;
 }
+void show(std::vector<Point> dt) //костыль для вывода вектора на экран
+{
+    std::cout<<"The result is: "<<std::endl;
+    for(auto it = dt.begin(); it != dt.end(); ++it) std::cout<<"angle = "<<it->angle<<"  velocity = "<<it->initial_velocity<<"  final = "<<it->final_velocity<<std::endl;
+}
 int main(int argc, char *argv[])
 {
+    Grid grid = Grid();
+    grid.set_angle_range(0, 30);
+    grid.set_velocity_range(0, 30);
+    grid.set_grid_size(3, 3);
+    show(grid.calculate());
     create_window(argc, argv, "window1", 600, 300);
     Object obj =Object(1, 1);
     obj.init_from_file("C:\\Users\\frolo\\Documents\\codeblocks\\visual_model\\data.csv", sz);
@@ -106,6 +117,5 @@ void display()
 }
 void idle()
 {
-    std::cout<<renderer.get_mode()<<std::endl;
     display();
 }
