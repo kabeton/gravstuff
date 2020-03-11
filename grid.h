@@ -5,7 +5,7 @@
 double get_solution(double angle, double velocity, string *_path)
 {
     int k = rand();
-    std::cout<<"angle = "<<angle<<"  velocity = "<<velocity<<"  final = "<<k<<std::endl;
+    //std::cout<<"angle = "<<angle<<"  velocity = "<<velocity<<"  final = "<<k<<std::endl;
     return k;
 }
 class Point
@@ -23,6 +23,16 @@ public:
 class Grid
 {
 public:
+    static std::vector<Point> data;
+    double min_angle;
+    double max_angle;
+    double min_velocity;
+    double max_velocity;
+    int num_divisions = 2;
+    int num_brunch = 1;
+    int depth = 4;
+    int grid_size1 = 10;
+    int grid_size2 = 10;
     void set_velocity_range(double v1, double v2)
     {
         min_velocity = v1;
@@ -57,6 +67,7 @@ public:
                 point.angle = i;
                 point.initial_velocity = g;
                 point.final_velocity = get_solution(i, g, &(point.path));
+                data.push_back(point);
                 if (buf.size() < num_brunch)
                 {
                     buf.push_back(point);
@@ -77,19 +88,8 @@ public:
         }
         return buf;
     }
-private:
-    static std::vector<Point> data;
-    double min_angle;
-    double max_angle;
-    double min_velocity;
-    double max_velocity;
-    int num_divisions = 2;
-    int num_brunch = 1;
-    int depth = 4;
-    int grid_size1 = 10;
-    int grid_size2 = 10;
 
 };
-
+std::vector<Point> Grid::data = std::vector<Point>();
 
 #endif // GRID_H_INCLUDED
