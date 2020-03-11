@@ -78,7 +78,7 @@ public:
         return buf;
     }
 private:
-    std::vector<Point> data;
+    static std::vector<Point> data;
     double min_angle;
     double max_angle;
     double min_velocity;
