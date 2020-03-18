@@ -66,20 +66,30 @@ public:
     }
     void dynamic_render(double dt)
     {
-        glBegin(GL_POINTS);
-        for (double i = 0; i <= time; i +=step)
-        {
-            Vector point = get_value(i);
-            glVertex2f(point.x, point.y);
-        }
-        glEnd();
         Vector point = get_value(time);
+        if(flag)
+        {
+
+        glBegin(GL_POINTS);
+       // for (double i = 0; i <= time; i +=step)
+        //{
+            glVertex2f(point.x, point.y);
+        //}
+        glEnd();
+        }
+        else
+        {
+
+        //Vector point = get_value(time);
+        glClear(GL_COLOR_BUFFER_BIT);
         glBegin(GL_POLYGON);
         for(double i = 0; i < 6.28; i +=0.5)
         {
             glVertex2f(point.x + 0.05*cos(i), point.y + 0.05*sin(i));
         }
         glEnd();
+        }
+        flag = !flag;
         time += dt;
     }
     void parser_init(char _sep)
@@ -112,7 +122,8 @@ private:
     deque<double*>::iterator position = data.begin();
     double time = 1;
     double n = 1;
-    double step = 0.00001;
+    double step = 0.0000001;
+    bool flag = true;
 };
 
 

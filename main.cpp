@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <GL/glut.h>
 #include<windows.h>
+#include"windns.h"
 #include <math.h>
 #include<vector>
 #include<set>
@@ -84,11 +85,11 @@ int main(int argc, char *argv[])
         if (range[3] > boundary[3]) range[3] = boundary[3];
         //show(result);
     }
-    std::cout<<"****"<<std::endl;
     show(Grid::data);
     create_window(argc, argv, "window1", 600, 300);
     Object obj =Object(1, 1);
-    obj.init_from_file("C:\\Users\\frolo\\Documents\\codeblocks\\visual_model\\data.csv", sz);
+    std::cout<<(result[0]).path;
+    obj.init_from_file((result[0]).path, sz);
     container.push_back(obj);
     Vector v = Vector(0, 0, 0);
     renderer.set_initial_time(0.2);
@@ -122,12 +123,18 @@ void menu(int pos)
         {
             renderer.set_initial_time(0.2);
             renderer.set_mode(true);
+            glClear(GL_COLOR_BUFFER_BIT);
+            glutSwapBuffers();
+            glClear(GL_COLOR_BUFFER_BIT);
             display();
             break;
         }
     case 4:
         {
             renderer.set_mode(false);
+            glClear(GL_COLOR_BUFFER_BIT);
+            glutSwapBuffers();
+            glClear(GL_COLOR_BUFFER_BIT);
             display();
             break;
         }
@@ -139,17 +146,18 @@ void menu(int pos)
 }
 void display()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
     if(renderer.get_mode())
     {
-        renderer.dynamic_render(0.00001);
+        renderer.dynamic_render(0.0000001);
+        Sleep(10 );
+        glutSwapBuffers();
     }
     else
     {
         renderer();
+        glutSwapBuffers();
     }
 
-    glutSwapBuffers();
 
 }
 void idle()

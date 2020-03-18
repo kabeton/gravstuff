@@ -2,10 +2,11 @@
 #define GRID_H_INCLUDED
 #include<string>
 #include<algorithm>
+string path = "C:\\Users\\frolo\\Documents\\codeblocks\\visual_model\\data.csv";//для отладки
 double get_solution(double angle, double velocity, string *_path)
 {
     int k = rand();
-    //std::cout<<"angle = "<<angle<<"  velocity = "<<velocity<<"  final = "<<k<<std::endl;
+    *_path = path;
     return k;
 }
 class Point
