@@ -148,6 +148,7 @@ void display()
     {
         renderer();
     }
+
     glutSwapBuffers();
 
 }

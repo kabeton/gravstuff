@@ -8,6 +8,7 @@
 #include<GL/glut.h>
 #include"Parser.h"
 #include<fstream>
+#include<math.h>
 using namespace std;
 class Compare
 {
@@ -70,6 +71,13 @@ public:
         {
             Vector point = get_value(i);
             glVertex2f(point.x, point.y);
+        }
+        glEnd();
+        Vector point = get_value(time);
+        glBegin(GL_POLYGON);
+        for(double i = 0; i < 6.28; i +=0.5)
+        {
+            glVertex2f(point.x + 0.05*cos(i), point.y + 0.05*sin(i));
         }
         glEnd();
         time += dt;
